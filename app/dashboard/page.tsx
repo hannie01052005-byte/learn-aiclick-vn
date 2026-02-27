@@ -22,9 +22,7 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-2xl">⏳ Đang tải...</div>
-      </div>
+      <div className="loading">⏳ Đang tải...</div>
     )
   }
 
@@ -40,24 +38,22 @@ export default function Dashboard() {
   ]
 
   return (
-    <div className="min-h-screen p-8">
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-bold">👋 Xin chào, {user.email?.split('@')[0]}!</h1>
-          <p className="text-gray-400">Sẵn sàng chinh phục vũ trụ?</p>
+    <div className="dashboard">
+      <div className="dashboard-header">
+        <div className="dashboard-title">
+          <h1>👋 Xin chào, {user.email?.split('@')[0]}!</h1>
+          <p>Sẵn sàng chinh phục vũ trụ?</p>
         </div>
-        <button onClick={handleSignOut} className="px-4 py-2 bg-red-500/20 border border-red-500 rounded-lg hover:bg-red-500/30">
-          🚪 Đăng xuất
-        </button>
+        <button onClick={handleSignOut} className="logout-btn">🚪 Đăng xuất</button>
       </div>
 
-      <h2 className="text-xl font-bold mb-4">🪐 Chọn hành tinh để khám phá</h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <h2 style={{fontSize: '1.3rem', marginBottom: '20px'}}>🪐 Chọn hành tinh để khám phá</h2>
+      <div className="subjects-grid">
         {subjects.map((s) => (
-          <Link key={s.id} href={s.path} className="block bg-gray-800 border-2 border-blue-500 rounded-xl p-6 text-center hover:scale-105 transition">
-            <div className="text-5xl mb-2">{s.icon}</div>
-            <div className="font-bold">{s.name}</div>
-            <div className="text-gray-400 text-sm">{s.desc}</div>
+          <Link key={s.id} href={s.path} className="subject-card">
+            <div className="subject-icon">{s.icon}</div>
+            <div className="subject-name">{s.name}</div>
+            <div className="subject-desc">{s.desc}</div>
           </Link>
         ))}
       </div>
