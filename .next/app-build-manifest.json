@@ -21,18 +21,26 @@
       "static/chunks/fd9d1056-e3489de6ce1f07f6.js",
       "static/chunks/23-f8b39b215f100adc.js",
       "static/chunks/main-app-ee767c59afb603ea.js",
-      "static/chunks/327-aa6b6603b6fbcb19.js",
       "static/chunks/138-037f119e9b2b5e19.js",
-      "static/chunks/app/dashboard/page-f44b13c09656c087.js"
+      "static/chunks/327-aa6b6603b6fbcb19.js",
+      "static/chunks/app/dashboard/page-662e99fa5107a935.js"
     ],
     "/login/page": [
       "static/chunks/webpack-91b2d14d0f678b80.js",
       "static/chunks/fd9d1056-e3489de6ce1f07f6.js",
       "static/chunks/23-f8b39b215f100adc.js",
       "static/chunks/main-app-ee767c59afb603ea.js",
-      "static/chunks/327-aa6b6603b6fbcb19.js",
       "static/chunks/138-037f119e9b2b5e19.js",
-      "static/chunks/app/login/page-54a57cf852dc4b1c.js"
+      "static/chunks/327-aa6b6603b6fbcb19.js",
+      "static/chunks/app/login/page-71cfc4e56ed1c127.js"
+    ],
+    "/english/page": [
+      "static/chunks/webpack-91b2d14d0f678b80.js",
+      "static/chunks/fd9d1056-e3489de6ce1f07f6.js",
+      "static/chunks/23-f8b39b215f100adc.js",
+      "static/chunks/main-app-ee767c59afb603ea.js",
+      "static/chunks/138-037f119e9b2b5e19.js",
+      "static/chunks/app/english/page-74f9c350883c965c.js"
     ],
     "/page": [
       "static/chunks/webpack-91b2d14d0f678b80.js",
@@ -42,14 +50,46 @@
       "static/chunks/138-037f119e9b2b5e19.js",
       "static/chunks/app/page-251a1f203058a7c0.js"
     ],
+    "/math/page": [
+      "static/chunks/webpack-91b2d14d0f678b80.js",
+      "static/chunks/fd9d1056-e3489de6ce1f07f6.js",
+      "static/chunks/23-f8b39b215f100adc.js",
+      "static/chunks/main-app-ee767c59afb603ea.js",
+      "static/chunks/138-037f119e9b2b5e19.js",
+      "static/chunks/app/math/page-4f5c810567bb51dc.js"
+    ],
+    "/quiz/[subject]/[grade]/page": [
+      "static/chunks/webpack-91b2d14d0f678b80.js",
+      "static/chunks/fd9d1056-e3489de6ce1f07f6.js",
+      "static/chunks/23-f8b39b215f100adc.js",
+      "static/chunks/main-app-ee767c59afb603ea.js",
+      "static/chunks/138-037f119e9b2b5e19.js",
+      "static/chunks/app/quiz/[subject]/[grade]/page-bb2d9cf6cf9237d4.js"
+    ],
     "/register/page": [
       "static/chunks/webpack-91b2d14d0f678b80.js",
       "static/chunks/fd9d1056-e3489de6ce1f07f6.js",
       "static/chunks/23-f8b39b215f100adc.js",
       "static/chunks/main-app-ee767c59afb603ea.js",
-      "static/chunks/327-aa6b6603b6fbcb19.js",
       "static/chunks/138-037f119e9b2b5e19.js",
-      "static/chunks/app/register/page-51f6eb0e4fb1ae8f.js"
+      "static/chunks/327-aa6b6603b6fbcb19.js",
+      "static/chunks/app/register/page-a0478eb587ff01c8.js"
+    ],
+    "/vietnam/page": [
+      "static/chunks/webpack-91b2d14d0f678b80.js",
+      "static/chunks/fd9d1056-e3489de6ce1f07f6.js",
+      "static/chunks/23-f8b39b215f100adc.js",
+      "static/chunks/main-app-ee767c59afb603ea.js",
+      "static/chunks/138-037f119e9b2b5e19.js",
+      "static/chunks/app/vietnam/page-654934a660df12f5.js"
+    ],
+    "/tin/page": [
+      "static/chunks/webpack-91b2d14d0f678b80.js",
+      "static/chunks/fd9d1056-e3489de6ce1f07f6.js",
+      "static/chunks/23-f8b39b215f100adc.js",
+      "static/chunks/main-app-ee767c59afb603ea.js",
+      "static/chunks/138-037f119e9b2b5e19.js",
+      "static/chunks/app/tin/page-7c7935a04012d38c.js"
     ]
   }
 }
