@@ -1,67 +1,100 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
 const planets = [
-  { id: 'math', name: 'Trái Đất', subject: 'Toán', icon: '🌍' },
-  { id: 'vietnam', name: 'Mặt Trăng', subject: 'Tiếng Việt', icon: '🌙' },
-  { id: 'english', name: 'Englishia', subject: 'Tiếng Anh', icon: '⭐' },
-  { id: 'tin', name: 'UFO Station', subject: 'Tin học', icon: '🚀' },
+  { id: 'math', name: 'Trái Đất', subject: 'Toán', icon: '🌍', color: 'blue', desc: 'Số học, hình học, đo lường' },
+  { id: 'vietnam', name: 'Mặt Trăng', subject: 'Tiếng Việt', icon: '🌙', color: 'green', desc: 'Chữ cái, từ vựng, ngữ pháp' },
+  { id: 'english', name: 'Englishia', subject: 'Tiếng Anh', icon: '⭐', color: 'yellow', desc: 'Từ vựng, phát âm, giao tiếp' },
+  { id: 'tin', name: 'UFO Station', subject: 'Tin học', icon: '🚀', color: 'purple', desc: 'Lập trình, máy tính, internet' },
 ]
 
 const features = [
-  { icon: '🎮', title: 'Gamification', desc: 'Nhập vai phi hành gia' },
+  { icon: '🎮', title: 'Chơi Mà Học', desc: 'Gamification thú vị' },
+  { icon: '🌟', title: 'Star Đồng Hành', desc: 'Nhân vật cute hỗ trợ' },
   { icon: '🧠', title: 'AI Thông Minh', desc: 'Học theo năng lực' },
-  { icon: '📊', title: 'Theo Dõi Tiến Độ', desc: 'Báo cáo cho phụ huynh' },
-  { icon: '🏆', title: 'Phần Thưởng', desc: 'Thu thập sao, huy hiệu' },
-  { icon: '🌟', title: 'Nhân Vật Cute', desc: 'Star người bạn đồng hành' },
-  { icon: '🎵', title: 'Học Mà Chơi', desc: 'Bài học như trò chơi' },
+  { icon: '🏆', title: 'Thử Thách', desc: 'Giải đố nhận thưởng' },
+  { icon: '📈', title: 'Tiến Bộ', desc: 'Theo dõi sự tiến bộ' },
+  { icon: '👨‍👩‍👧', title: 'Phụ Huynh', desc: 'Báo cáo cho cha mẹ' },
 ]
 
 export default function Home() {
+  const [stars, setStars] = useState<{id: number, left: string, top: string, duration: string}[]>([])
+
+  useEffect(() => {
+    // Generate random stars
+    const newStars = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: `${2 + Math.random() * 3}s`
+    }))
+    setStars(newStars)
+  }, [])
+
   return (
     <main>
-      <div className="stars" />
+      {/* Animated Stars */}
+      <div className="stars">
+        {stars.map((star) => (
+          <div
+            key={star.id}
+            className="star"
+            style={{
+              left: star.left,
+              top: star.top,
+              width: `${2 + Math.random() * 3}px`,
+              height: `${2 + Math.random() * 3}px`,
+              animationDuration: star.duration
+            }}
+          />
+        ))}
+      </div>
       
-      {/* Hero */}
+      {/* Hero with Star */}
       <section className="hero">
-        <div className="hero-emoji">🚀</div>
+        <div className="hero-emoji">🌟</div>
         <h1>Học Viện Vũ Trụ</h1>
-        <p>Hành trình khám phá vũ trụ kiến thức cùng Star! 🌟</p>
+        <p>Hành trình khám phá vũ trụ kiến thức cùng Star! ✨</p>
         <div className="hero-buttons">
-          <Link href="/register" className="btn btn-primary">🚀 Bắt Đầu Ngay - FREE</Link>
+          <Link href="/register" className="btn btn-primary">🚀 Bắt Đầu Ngay</Link>
           <Link href="/login" className="btn btn-secondary">Đăng Nhập</Link>
         </div>
       </section>
 
-      {/* Mascot */}
+      {/* Star Mascot Introduction */}
       <section className="mascot-section">
-        <div className="mascot-emoji">👋</div>
-        <h2>Xin chào! Tôi là <span style={{color: '#fbbf24'}}>Star</span> 🌟</h2>
-        <p style={{maxWidth: '600px', margin: '0 auto'}}>
-          Tôi sẽ đồng hành cùng các bạn trong hành trình chinh phục vũ trụ kiến thức!
-        </p>
+        <div className="mascot-container">
+          <div className="mascot-emoji">🌟</div>
+          <div className="mascot-speech">
+            <h2 style={{marginBottom: '15px', fontSize: '1.5rem'}}>Xin chào! Tôi là Star 🌟</h2>
+            <p>Tôi sẽ đồng hành cùng các bạn trong hành trình chinh phục vũ trụ kiến thức!</p>
+            <p style={{marginTop: '15px', color: '#fbbf24'}}>Cùng nhau khám phá nào! 🚀</p>
+          </div>
+        </div>
       </section>
 
       {/* Planets */}
       <section className="planets-section">
         <div className="container">
-          <h2 style={{textAlign: 'center'}}>🪐 <span style={{color: '#60a5fa'}}>Khám Phá</span> Các Hành Tinh</h2>
+          <h2>🪐 <span style={{color: '#60a5fa'}}>Khám Phá</span> Các Hành Tinh</h2>
           <div className="planets-grid">
             {planets.map((p) => (
-              <div key={p.id} className="planet-card">
+              <Link key={p.id} href={`/${p.id}`} className="planet-card">
                 <div className="planet-icon">{p.icon}</div>
                 <h3 className="planet-name">{p.name}</h3>
                 <p className="planet-subject">{p.subject}</p>
-              </div>
+                <p style={{marginTop: '10px', fontSize: '0.9rem', color: '#9ca3af'}}>{p.desc}</p>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
       {/* Features */}
-      <section>
-        <h2 style={{textAlign: 'center'}}>✨ <span style={{color: '#a78bfa'}}>Tính Năng</span> Đặc Biệt</h2>
+      <section className="features-section">
+        <h2>✨ <span style={{color: '#a78bfa'}}>Tính Năng</span> Đặc Biệt</h2>
         <div className="features-grid">
           {features.map((f) => (
             <div key={f.title} className="feature-card">
@@ -76,8 +109,12 @@ export default function Home() {
       {/* CTA */}
       <section className="cta-section">
         <h2>Sẵn Sàng <span style={{color: '#4ade80'}}>Khám Phá</span>?</h2>
-        <p>Đăng ký ngay để nhận <span style={{color: '#fbbf24', fontWeight: 'bold'}}>7 ngày Premium FREE</span>!</p>
-        <Link href="/register" className="btn btn-primary" style={{fontSize: '1.2rem', padding: '18px 40px'}}>🚀 Đăng Ký Ngay</Link>
+        <p style={{fontSize: '1.3rem', marginBottom: '30px'}}>
+          Đăng ký ngay để nhận <span style={{color: '#fbbf24', fontWeight: 'bold'}}>⭐ 100 Sao</span> miễn phí!
+        </p>
+        <Link href="/register" className="btn btn-primary" style={{fontSize: '1.3rem', padding: '20px 50px'}}>
+          🚀 Đăng Ký Ngay
+        </Link>
       </section>
 
       <footer>

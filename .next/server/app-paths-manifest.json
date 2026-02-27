@@ -3,10 +3,10 @@
   "/dashboard/page": "app/dashboard/page.js",
   "/login/page": "app/login/page.js",
   "/english/page": "app/english/page.js",
-  "/page": "app/page.js",
   "/math/page": "app/math/page.js",
+  "/page": "app/page.js",
   "/quiz/[subject]/[grade]/page": "app/quiz/[subject]/[grade]/page.js",
   "/register/page": "app/register/page.js",
-  "/vietnam/page": "app/vietnam/page.js",
-  "/tin/page": "app/tin/page.js"
+  "/tin/page": "app/tin/page.js",
+  "/vietnam/page": "app/vietnam/page.js"
 }

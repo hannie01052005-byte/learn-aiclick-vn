@@ -21,7 +21,7 @@ export default function Login() {
     const { error } = await signIn(email, password)
     
     if (error) {
-      setError(error.message)
+      setError(error.message === 'Invalid login credentials' ? 'Email hoặc mật khẩu không đúng!' : error.message)
       setLoading(false)
     } else {
       router.push('/dashboard')
@@ -32,7 +32,7 @@ export default function Login() {
     <div className="form-container">
       <div className="form-box">
         <div className="form-header">
-          <div className="form-header-emoji">🚀</div>
+          <div className="form-header-emoji">🌟</div>
           <h1>Đăng Nhập</h1>
           <p>Chào mừng phi hành gia trở lại!</p>
         </div>
@@ -72,6 +72,10 @@ export default function Login() {
             Chưa có tài khoản? <Link href="/register">Đăng ký ngay</Link>
           </div>
         </form>
+
+        <div style={{textAlign: 'center', marginTop: '20px'}}>
+          <Link href="/" style={{color: '#9ca3af', fontSize: '0.9rem'}}>← Về trang chủ</Link>
+        </div>
       </div>
     </div>
   )
