@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+// Dynamic import cho Cosmo (tránh SSR issues)
+const Cosmo = dynamic(() => import('../components/Cosmo'), { 
+  ssr: false,
+  loading: () => <div className="cosmo-placeholder" />
+})
 
 const planets = [
   { id: 'math', name: 'Trái Đất', subject: 'Toán', icon: '🌍', color: 'blue', desc: 'Số học, hình học, đo lường' },
@@ -12,15 +19,16 @@ const planets = [
 
 const features = [
   { icon: '🎮', title: 'Chơi Mà Học', desc: 'Gamification thú vị' },
-  { icon: '🌟', title: 'Star Đồng Hành', desc: 'Nhân vật cute hỗ trợ' },
   { icon: '🧠', title: 'AI Thông Minh', desc: 'Học theo năng lực' },
   { icon: '🏆', title: 'Thử Thách', desc: 'Giải đố nhận thưởng' },
   { icon: '📈', title: 'Tiến Bộ', desc: 'Theo dõi sự tiến bộ' },
   { icon: '👨‍👩‍👧', title: 'Phụ Huynh', desc: 'Báo cáo cho cha mẹ' },
+  { icon: '🤖', title: 'Cosmo Đồng Hành', desc: 'Nhân vật cute hỗ trợ' },
 ]
 
 export default function Home() {
   const [stars, setStars] = useState<{id: number, left: string, top: string, duration: string}[]>([])
+  const [showCosmo, setShowCosmo] = useState(false)
 
   useEffect(() => {
     // Generate random stars
@@ -31,6 +39,10 @@ export default function Home() {
       duration: `${2 + Math.random() * 3}s`
     }))
     setStars(newStars)
+    
+    // Show Cosmo after a short delay
+    const timer = setTimeout(() => setShowCosmo(true), 500)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -52,25 +64,50 @@ export default function Home() {
         ))}
       </div>
       
-      {/* Hero with Star */}
+      {/* Hero with Cosmo */}
       <section className="hero">
-        <div className="hero-emoji">🌟</div>
-        <h1>Học Viện Vũ Trụ</h1>
-        <p>Hành trình khám phá vũ trụ kiến thức cùng Star! ✨</p>
-        <div className="hero-buttons">
-          <Link href="/register" className="btn btn-primary">🚀 Bắt Đầu Ngay</Link>
-          <Link href="/login" className="btn btn-secondary">Đăng Nhập</Link>
+        {/* Cosmo Mascot */}
+        {showCosmo && (
+          <div className="hero-cosmo">
+            <Cosmo 
+              mood="excited" 
+              size="xl"
+              showMessage={true}
+              customMessage="Xin chào! Tôi là Cosmo 🪐✨ Hãy cùng khám phá vũ trụ kiến thức nhé!"
+            />
+          </div>
+        )}
+        
+        <div className="hero-content">
+          <h1>Học Viện Vũ Trụ</h1>
+          <p>Hành trình chinh phục vũ trụ kiến thức cùng Cosmo! 🚀</p>
+          <div className="hero-buttons">
+            <Link href="/register" className="btn btn-primary">🚀 Bắt Đầu Ngay</Link>
+            <Link href="/login" className="btn btn-secondary">Đăng Nhập</Link>
+          </div>
         </div>
       </section>
 
-      {/* Star Mascot Introduction */}
+      {/* Cosmo Introduction */}
       <section className="mascot-section">
-        <div className="mascot-container">
-          <div className="mascot-emoji">🌟</div>
-          <div className="mascot-speech">
-            <h2 style={{marginBottom: '15px', fontSize: '1.5rem'}}>Xin chào! Tôi là Star 🌟</h2>
-            <p>Tôi sẽ đồng hành cùng các bạn trong hành trình chinh phục vũ trụ kiến thức!</p>
-            <p style={{marginTop: '15px', color: '#fbbf24'}}>Cùng nhau khám phá nào! 🚀</p>
+        <div className="container">
+          <h2>🌟 <span style={{color: '#a78bfa'}}>Gặp Gỡ</span> Cosmo</h2>
+          <div className="cosmo-intro-grid">
+            <div className="cosmo-intro-card">
+              <div className="cosmo-intro-emoji">🪐</div>
+              <h3>Từ Đâu?</h3>
+              <p>Cosmo đến từ hành tinh Slimeia xa xôi, đến Trái Đất để giúp các bạn học tập vui vẻ!</p>
+            </div>
+            <div className="cosmo-intro-card">
+              <div className="cosmo-intro-emoji">💫</div>
+              <h3>Tính Cách</h3>
+              <p>Năng động, tích cực và luôn ủng hộ bạn. Cosmo không bao giờ chê bai ai!</p>
+            </div>
+            <div className="cosmo-intro-card">
+              <div className="cosmo-intro-emoji">🎯</div>
+              <h3>Sức Mạnh</h3>
+              <p>Biết rất nhiều về Toán, Tiếng Việt, Tiếng Anh và Tin học. Sẵn sàng giảng dạy bất kỳ lúc nào!</p>
+            </div>
           </div>
         </div>
       </section>

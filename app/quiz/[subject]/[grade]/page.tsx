@@ -3,6 +3,13 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic'
+
+// Dynamic import cho Cosmo
+const Cosmo = dynamic(() => import('../../../../components/Cosmo'), {
+  ssr: false,
+  loading: () => <div style={{fontSize: '4rem', textAlign: 'center'}}>🪐</div>
+})
 
 // Câu hỏi theo chương trình Việt Nam
 const quizzes = {
@@ -114,6 +121,15 @@ const subjectNames: Record<string, string> = {
   tin: 'Tin học',
 }
 
+// Messages cho từng state
+const cosmoMessages = {
+  start: "Cùng bắt đầu nào! Bạn sẵn sàng chưa? 🚀",
+  correct: "Giỏi quá! Tiếp tục nào! ⭐",
+  wrong: "Ối! Đừng nản, thử lại nhé! 💪",
+  hint: "Gợi ý nè: Cố lên! 🌟",
+  complete: "XONG RỒI! Bạn siêu quá! 🏆"
+}
+
 export default function QuizPage() {
   const params = useParams()
   const router = useRouter()
@@ -127,6 +143,8 @@ export default function QuizPage() {
   const [showResult, setShowResult] = useState(false)
   const [selected, setSelected] = useState<number | null>(null)
   const [showExplain, setShowExplain] = useState(false)
+  const [cosmoMood, setCosmoMood] = useState<'happy' | 'excited' | 'proud' | 'thinking' | 'sad'>('excited')
+  const [cosmoMessage, setCosmoMessage] = useState(cosmoMessages.start)
 
   if (questions.length === 0) {
     return (
@@ -145,8 +163,15 @@ export default function QuizPage() {
     setSelected(index)
     setShowExplain(true)
     
-    if (index === questions[current].answer) {
+    const isCorrect = index === questions[current].answer
+    
+    if (isCorrect) {
       setScore(score + 1)
+      setCosmoMood('proud')
+      setCosmoMessage(cosmoMessages.correct)
+    } else {
+      setCosmoMood('thinking')
+      setCosmoMessage(cosmoMessages.wrong)
     }
     
     setTimeout(() => {
@@ -154,8 +179,12 @@ export default function QuizPage() {
         setCurrent(current + 1)
         setSelected(null)
         setShowExplain(false)
+        setCosmoMood('happy')
+        setCosmoMessage(`Câu ${current + 2} nè! Xem nào... 🔍`)
       } else {
         setShowResult(true)
+        setCosmoMood('excited')
+        setCosmoMessage(cosmoMessages.complete)
       }
     }, 2000)
   }
@@ -164,9 +193,14 @@ export default function QuizPage() {
     const percent = Math.round((score / questions.length) * 100)
     const resultEmoji = percent >= 80 ? '🏆' : percent >= 60 ? '🌟' : '💪'
     const resultMessage = percent >= 80 ? 'Xuất sắc! Bạn là thiên tài!' : percent >= 60 ? 'Làm tốt lắm! Tiếp tục cố gắng!' : 'Đừng nản! Luyện tập thêm nhé!'
+    const finalMood = percent >= 80 ? 'excited' : percent >= 60 ? 'proud' : 'happy'
+    const finalMsg = percent >= 80 ? 'WOW! Bạn siêu quá! 🌟✨' : percent >= 60 ? 'Tuyệt vời! Cố gắng lắm! 💪' : 'Không sao! Lần sau sẽ tốt hơn! 🌱'
     
     return (
       <div className="result-container">
+        <div style={{marginBottom: '20px'}}>
+          <Cosmo mood={finalMood} size="xl" showMessage={true} customMessage={finalMsg} />
+        </div>
         <div className="result-emoji">{resultEmoji}</div>
         <h1>Kết Quả!</h1>
         <div className="result-score">{score} / {questions.length}</div>
@@ -197,10 +231,14 @@ export default function QuizPage() {
         </div>
       </div>
 
-      {/* Star mascot */}
+      {/* Cosmo Mascot with dynamic message */}
       <div style={{textAlign: 'center', marginBottom: '20px'}}>
-        <span style={{fontSize: '3rem'}}>🌟</span>
-        <p style={{color: '#fbbf24', fontSize: '0.9rem'}}>Star đang theo dõi bạn!</p>
+        <Cosmo 
+          mood={cosmoMood} 
+          size="lg" 
+          showMessage={true}
+          customMessage={cosmoMessage}
+        />
       </div>
 
       {/* Question */}

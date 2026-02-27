@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import '../components/Cosmo.css'
 import { AuthProvider } from '../lib/auth-context'
 
 export const metadata: Metadata = {

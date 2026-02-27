@@ -3,17 +3,37 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useAuth } from '../../lib/auth-context'
+
+// Dynamic import cho Cosmo
+const Cosmo = dynamic(() => import('../../components/Cosmo'), { 
+  ssr: false,
+  loading: () => <div style={{fontSize: '4rem', textAlign: 'center'}}>🪐</div>
+})
 
 export default function Dashboard() {
   const { user, loading, signOut } = useAuth()
   const router = useRouter()
+  const [cosmoGreeting, setCosmoGreeting] = useState("Chào bạn! Hôm nay học gì nào? 🌟")
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/login')
     }
   }, [user, loading, router])
+
+  // Random greeting từ Cosmo
+  useEffect(() => {
+    const greetings = [
+      "Chào bạn! Hôm nay học gì nào? 🌟",
+      "Yo! Sẵn sàng chinh phục chưa? 🚀",
+      "Rất vui được gặp lại bạn! ✨",
+      "Hành trình hôm nay bắt đầu! 🎯",
+      "Nào, khám phá nào! 🪐"
+    ]
+    setCosmoGreeting(greetings[Math.floor(Math.random() * greetings.length)])
+  }, [])
 
   const handleSignOut = async () => {
     await signOut()
@@ -45,6 +65,26 @@ export default function Dashboard() {
           <p>Sẵn sàng chinh phục vũ trụ?</p>
         </div>
         <button onClick={handleSignOut} className="logout-btn">🚪 Đăng xuất</button>
+      </div>
+
+      {/* Cosmo Welcome */}
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(79, 70, 229, 0.1) 100%)',
+        borderRadius: '25px',
+        padding: '30px',
+        marginBottom: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '30px',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+      }}>
+        <Cosmo 
+          mood="excited" 
+          size="lg" 
+          showMessage={true}
+          customMessage={cosmoGreeting}
+        />
       </div>
 
       <h2 style={{fontSize: '1.3rem', marginBottom: '20px'}}>🪐 Chọn hành tinh để khám phá</h2>

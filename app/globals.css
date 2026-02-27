@@ -705,4 +705,78 @@ footer {
     flex-direction: column;
     align-items: flex-start;
   }
+  
+  /* Hero with Cosmo */
+  .hero-cosmo {
+    margin-bottom: 30px;
+  }
+  
+  .hero-content {
+    text-align: center;
+  }
+  
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Hero with Cosmo */
+.hero-cosmo {
+  margin-bottom: 30px;
+  animation: slideUp 0.8s ease-out;
+}
+
+.hero-content {
+  animation: slideUp 0.8s ease-out 0.2s both;
+}
+
+/* Cosmo Introduction Section */
+.cosmo-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.cosmo-intro-card {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2) 0%, rgba(79, 70, 229, 0.1) 100%);
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  border-radius: 25px;
+  padding: 35px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.cosmo-intro-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2);
+}
+
+.cosmo-intro-emoji {
+  font-size: 4rem;
+  margin-bottom: 20px;
+  animation: float 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+.cosmo-intro-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #a78bfa;
+}
+
+.cosmo-intro-card p {
+  color: #d1d5db;
+  line-height: 1.6;
+}
+
+.cosmo-placeholder {
+  width: 180px;
+  height: 160px;
+  margin: 0 auto;
 }
